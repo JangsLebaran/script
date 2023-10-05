@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generate User and Proxy</title>
+    <style>
+      body {
+        background-image: url("https://media.discordapp.net/attachments/1068072767955685446/1147673792651464886/Jangs.jpg?width=327&height=327");
+        background-size: 30%;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-color: black;
+        color: rgb(255, 255, 255);
+        background-position: center center;
+        height: 100vh;
+      }
+
+      table.container {
+        max-width: 800px;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      table.container td {
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      button {
+        background-color: #ff00ee;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #2980b9;
+      }
+
+      textarea {
+        color: rgb(255, 255, 255);
+        background-color: black;
+        width: 100%;
+        resize: none;
+      }
+      .credit-box {
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 10px;
+        border-radius: 10px;
+        margin-top: 20px;
+        text-align: center;
+      }
+    </style>
+    <script>
+      function generateData() {
+        const botText = document.getElementById("botTextarea").value;
+        const proxyText = document.getElementById("proxyTextarea").value;
+        const botPerIP = document.getElementById("botPerIP").value;
+        const usercoybot = botText
+          .split("\n")
+          .map((line) => line.trim())
+          .filter((line) => line !== "");
+
+        const proxycoy = proxyText
+          .split("\n")
+          .map((line) => line.trim())
+          .filter((line) => line !== "");
+        let resultText = "";
+
+        resultText += "usercoybot = {\n";
+        for (let i = 0; i < usercoybot.length; i++) {
+          resultText += `"${usercoybot[i]}",\n`;
+        }
+        resultText += "}\n\n";
+        resultText += "proxycoy = {\n";
+        for (let i = 0; i < proxycoy.length; i++) {
+          resultText += `"${proxycoy[i]}",\n`;
+        }
+        resultText += "}\n";
+        resultText += `botperip = ${botPerIP}\n\n`;
+        resultText += "startproxy = 1\n";
+        resultText += "startlogin = 0\n";
+
+        function generateConnectCoyFunction() {
+          let functionText = "function ConnectCoy(user, Proxy)\n";
+          functionText +=
+            '   local usercoy,passcoy = user:match("([^:]+):([^:]+)")\n';
+          functionText += `   local proxyipcoy, proxyportcoy, usernameproxycoy, passwordproxycoy = proxycoy[startproxy]:match("([^:]+):([^:]+):([^:]+):([^:]+)")\n`;
+          functionText += "   Proxy = {\n";
+          functionText += '      HostName= proxyipcoy..":".. proxyportcoy,\n';
+          functionText += "      Username= usernameproxycoy,\n";
+          functionText += "      Password= passwordproxycoy,\n";
+          functionText += "      Type=SOCKS5\n";
+          functionText += "   }\n";
+          functionText += "  connect(usercoy,passcoy,Proxy)\n";
+          functionText += "end\n";
+          return functionText;
+        }
+
+        resultText += generateConnectCoyFunction();
+        resultText += "for _, botname in pairs(usercoybot) do\n";
+        resultText += "   sleep(100)\n";
+        resultText += "   ConnectCoy(botname,Proxy)\n";
+        resultText += "   sleep(100)\n";
+        resultText += "   startlogin = startlogin + 1\n";
+        resultText += "   sleep(100)\n";
+        resultText += "   if startlogin == botperip then\n";
+        resultText += "      sleep(100)\n";
+        resultText += "      startlogin = 0\n";
+        resultText += "      sleep(100)\n";
+        resultText += "      startproxy = startproxy + 1\n";
+        resultText += "      sleep(100)\n";
+        resultText += "   end\n";
+        resultText += "end\n";
+        const resultTextArea = document.getElementById("result");
+        resultTextArea.value = resultText;
+      }
+
+      function copyHasil() {
+        const resultTextArea = document.getElementById("result");
+        resultTextArea.select();
+        document.execCommand("copy");
+        alert("Hasil telah disalin ke clipboard!");
+      }
+      function generateOlym() {
+        const botText = document.getElementById("botTextarea").value;
+        const proxyText = document.getElementById("proxyTextarea").value;
+        const botPerIP = document.getElementById("botPerIP").value;
+        const usercoybot = botText
+          .split("\n")
+          .map((line) => line.trim())
+          .filter((line) => line !== "");
+        const proxycoy = proxyText
+          .split("\n")
+          .map((line) => line.trim())
+          .filter((line) => line !== "");
+        let resultText = "";
+
+        resultText += "jangs = {\n";
+        for (let i = 0; i < usercoybot.length; i++) {
+          const [user, pass] = usercoybot[i].split(":");
+          resultText += `  "${user}:${pass}",\n`;
+        }
+        resultText += "}\n\n";
+
+        resultText += "jangsprox = {\n";
+        for (let i = 0; i < proxycoy.length; i++) {
+          resultText += `  "${proxycoy[i]}",\n`;
+        }
+        resultText += "}\n";
+
+        resultText += `BotPerIP = ${botPerIP}\n`;
+        resultText += "startproxy = 1\n";
+        resultText += "starlogin = 0\n\n";
+
+        resultText += "for _, namebot in pairs(jangs) do\n";
+        resultText += "  starlogin = starlogin + 1\n";
+        resultText += '  local user, pass = namebot:match("(.-):(.+)")\n';
+        resultText += "  addBot(user, pass, jangsprox[startproxy])\n";
+        resultText += "  sleep(100)\n";
+        resultText += "  if starlogin == BotPerIP then\n";
+        resultText += "    startproxy = startproxy + 1\n";
+        resultText += "    starlogin = 0\n";
+        resultText += "  end\n";
+        resultText += "end\n";
+
+        const resultTextArea = document.getElementById("result");
+        resultTextArea.value = resultText;
+      }
+    </script>
+  </head>
+  <body>
+    <h1 style="text-align: center">
+      Jangs Add-Bot Script for CID Generator :|
+    </h1>
+
+    <table class="container">
+      <tr>
+        <td>
+          <h2>Bot</h2>
+          <textarea
+            id="botTextarea"
+            placeholder="Contoh : username:password"
+          ></textarea>
+        </td>
+        <td>
+          <h2>Proxy</h2>
+          <textarea
+            id="proxyTextarea"
+            placeholder="Contoh : ip:port:user:pass"
+          ></textarea>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h2>Bot per IP</h2>
+          <input type="number" id="botPerIP" value="3" />
+        </td>
+        <td>
+          <h2>Actions</h2>
+          <button onclick="generateData()">Surfer</button>
+          <button onclick="generateOlym()">Olympus</button>
+          <button onclick="action3()">Lucifer</button>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <h2>Result Script :</h2>
+          <textarea id="result" readonly></textarea>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" class="credit-box">
+          <p>Made By : Jangs Lebaran</p>
+          <p>JangsID Store Price :</p>
+          <p></p>
+          <p>Guest 3WL</p>
+          <p>CID ANTI 15WL</p>
+          <p>Link : https://discord.gg/mFSzq2g76Q</p>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" style="text-align: center">
+          <button onclick="copyHasil()">Copy</button>
+        </td>
+      </tr>
+    </table>
+
+    <script>
+      function action1() {
+        alert("Action 1 dijalankan!");
+      }
+
+      function action2() {
+        alert("Action 2 dijalankan!");
+      }
+
+      function action3() {
+        alert("Not Working !!");
+      }
+    </script>
+  </body>
+</html>
