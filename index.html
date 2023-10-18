@@ -232,7 +232,25 @@
 
     <script>
       function generateLuci() {
-        alert("Not Working !!");
+        const botText = document.getElementById("botTextarea").value;
+        const usercoybot = botText
+          .split("\n")
+          .map((line) => line.trim())
+          .filter((line) => line !== "");
+        let resultText = "";
+        resultText += "jangs = {\n";
+        for (let i = 0; i < usercoybot.length; i++) {
+          const [user, pass] = usercoybot[i].split(":");
+          resultText += `   "${user}:${pass}",\n`;
+        }
+        resultText += "}\n";
+        resultText += "for _, namebot in pairs(jangs) do\n";
+        resultText += '   local user, pass = namebot:match("(.-):(.+)")\n';
+        resultText += "   addBot(user, pass)\n";
+        resultText += "   sleep(100)\n";
+        resultText += "end\n";
+        const resultTextArea = document.getElementById("result");
+        resultTextArea.value = resultText;
       }
     </script>
   </body>
