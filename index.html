@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Generate User and Proxy</title>
+    <title> </title>
     <style>
       body {
         background-image: url("https://media.discordapp.net/attachments/1068072767955685446/1147673792651464886/Jangs.jpg?width=327&height=327");
@@ -13,49 +13,301 @@
         background-color: black;
         color: rgb(255, 255, 255);
         background-position: center center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
         height: 100vh;
+        margin: 0;
       }
-
-      table.container {
+      .container {
+        display: flex;
         max-width: 800px;
         width: 100%;
-        margin: 0 auto;
       }
-
-      table.container td {
+      .left {
         background-color: rgba(0, 0, 0, 0.6);
         padding: 20px;
         border-radius: 10px;
+        flex: 1;
+        margin-right: 10px;
       }
-
+      .right {
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 20px;
+        border-radius: 10px;
+        flex: 1;
+        margin-left: 10px;
+      }
+      .center-box {
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 20px;
+        border-radius: 10px;
+        margin: 10px auto;
+        max-width: 800px;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .credit-box {
+        text-align: center;
+      }
       button {
         background-color: #ff00ee;
         color: white;
         border: none;
         padding: 10px 20px;
         cursor: pointer;
+        border-radius: 5px; 
         transition: background-color 0.3s ease;
       }
-
       button:hover {
         background-color: #2980b9;
       }
-
       textarea {
         color: rgb(255, 255, 255);
         background-color: black;
-        width: 100%;
-        resize: none;
+        resize: none; 
       }
-      .credit-box {
-        background-color: rgba(0, 0, 0, 0.6);
-        padding: 10px;
-        border-radius: 10px;
-        margin-top: 20px;
+      .button-container {
+        position: absolute;
+        top: 150px;
+        left: 50px;
+        display: flex;
+        flex-direction: column;
+        border: 2px solid #333;
+        border-radius: 5px; 
+        padding: 20px;
+        margin: 10px; 
         text-align: center;
+        resize: none; 
+      }
+      .button {
+        margin-bottom: 10px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+      }
+      .button img {
+        height: 1em;
+        margin-right: 5px;
+      }
+      .button-text {
+        text-align: left;
       }
     </style>
+  </head>
+  <body>
+    <div class="center-box">
+      <h1>JangsID | Script Store</h1>
+      <div id="content">
+        <h2>How to Use !!</h2>
+        <p>1.Pilih dari samping kiri.</p>
+        <p>2.Tekan dan liat apa yang terjadi.</p>
+        <p></p>
+        <p>Made By : Jangs Lebaran.</p>
+        <p>Link for other product :</p>
+        <p>
+          <a href="https://discord.gg/mFSzq2g76Q" target="_blank" style="color: white;">
+            Join our Discord Server
+          </a>
+        </p>
+      </div>
+      <div class="button-container">
+          <button class="button button1" onclick="loadScript()">
+            <img
+              src="https://cdn.discordapp.com/emojis/1070928025132204032.webp?size=80&quality=lossless"
+              alt="Script Logo"
+            />
+            <span>Script</span>
+          </button>
+          <button class="button button2" onclick="loadSusun()">
+            <img
+              src="https://cdn.discordapp.com/emojis/1151947032450318436.webp?size=80&quality=lossless"
+              alt="Susun Logo"
+            />
+            <span>Susun</span>
+          </button>
+          <button class="button button3" onclick="loadJangs()">
+            <img
+              src="https://cdn.discordapp.com/emojis/1070928063849844787.webp?size=80&quality=lossless"
+              alt="Jangs Logo"
+            />
+            <span>Jangs</span>
+          </button>
+        </div>
+      </div>
+    </div>
     <script>
+      function loadScript() {
+        const content = document.getElementById("content");
+        content.innerHTML = `
+        <table class="container">
+          <tr>
+            <td style="text-align: center">
+              <h2>Bot</h2>
+              <textarea
+                id="botTextarea"
+                placeholder="Contoh : username:password"
+              ></textarea>
+            </td>
+            <td style="text-align: center">
+              <h2>Proxy</h2>
+              <textarea
+                id="proxyTextarea"
+                placeholder="Contoh : ip:port:user:pass"
+              ></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: center">
+              <h2>Bot per IP</h2>
+              <input type="number" id="botPerIP" value="3" />
+            </td>
+            <td style="text-align: center">
+              <h2>
+                <img src="https://cdn.discordapp.com/emojis/1139997999817302068.webp?size=40&quality=lossless" alt="Logo 1"  width="50" height="50">
+                <img src="https://cdn.discordapp.com/emojis/1097490757297901668.webp?size=80&quality=lossless" alt="Logo 2"  width="50" height="50">
+                <img src="https://cdn.discordapp.com/emojis/1139998248258511030.webp?size=40&quality=lossless" alt="Logo 3"  width="50" height="50">
+                
+              </h2>              
+              <button onclick="generateData()">Surfer</button>
+              <button onclick="generateOlym()">Olympus</button>
+              <button onclick="generateLuci()">Lucifer</button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <h2>Result Script :</h2>
+              <textarea id="result" readonly></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" class="credit-box">
+              <p>Made By : Jangs Lebaran</p>
+              <p>JangsID Store Price :</p>
+              <p></p>
+              <p>Guest 3WL</p>
+              <p>CID ANTI 15WL</p>
+              <p>
+                <a href="https://discord.gg/mFSzq2g76Q" target="_blank" style="color: white;">
+                  Join our Discord Server
+                </a>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" style="text-align: center">
+              <button onclick="copyHasil()">Copy</button>
+            </td>
+          </tr>
+        </table>
+      `;
+        document.querySelector("h1").style.display = "none";
+      }
+      function loadSusun() {
+        const content = document.getElementById("content");
+        content.innerHTML = `
+          <div class="center-box">
+            <h2>How to Use !!</h2>
+            <p>1. Format nya seperti ini "WORLD",</p>
+            <p>2. Pilih mau yang mana terserah.</p>
+            <p></p>
+            <p>Made By : Jangs Lebaran.</p>
+            <p>Link for other product :</p>
+            <p>
+              <a href="https://discord.gg/mFSzq2g76Q" target="_blank" style="color: white;">
+                Join our Discord Server
+              </a>
+            </p>
+          </div>
+      
+          <div class="container">
+            <div class="left">
+              <h1>Susun Farm</h1>
+              <label for="farmList">Masukkan daftar farm :</label><br />
+              <textarea id="farmList" rows="5" cols="40"></textarea><br /><br />
+      
+              <label for="total">Total :</label>
+              <input type="number" id="total" min="1" value="2" /><br /><br />
+      
+              <button onclick="groupFarms()">Create File</button>
+      
+              <h1></h1>
+      
+              <label for="kataHapus">List Kemalingan :</label><br />
+              <textarea id="kataHapus" rows="3" cols="40"></textarea><br /><br />
+              <button onclick="hapusKata()">Delete World</button>
+            </div>
+      
+            <div class="right">
+              <h1>Create World|Door</h1>
+      
+              <form id="worldDoorForm">
+                <label for="worldList">Nama List world :</label><br />
+                <textarea
+                  id="worldList"
+                  name="worldList"
+                  rows="5"
+                  cols="40"
+                  required
+                ></textarea
+                ><br /><br />
+      
+                <label for="door">Door:</label>
+                <input type="text" id="door" name="door" required /><br /><br />
+      
+                <button type="button" id="createBtn" onclick="createWorldDoorFile()">
+                  Create File
+                </button>
+              </form>
+            </div>
+            <div id="result"></div>
+          </div>
+        `;
+
+        document.querySelector("h1").style.display = "none";
+      }
+      function loadJangs() {
+        const content = document.getElementById("content");
+        content.innerHTML = `
+          <h2>Jangs Lebaran</h2>
+          <p> Gua Biasa dipanggil Jangs atau Arap. </p>
+          <p> Umur gua yang pasti 20+ </p>
+          <p> Gua juga jualan berbagai product.</p>
+          <p></p>
+          <p>
+            <a href="https://discord.gg/mFSzq2g76Q" target="_blank" style="color: white;">
+              Join our Discord Server
+            </a>
+          </p>
+          
+        `;
+        document.querySelector("h1").style.display = "none";
+      }
+      
+      function generateLuci() {
+        const botText = document.getElementById("botTextarea").value;
+        const usercoybot = botText
+          .split("\n")
+          .map((line) => line.trim())
+          .filter((line) => line !== "");
+        let resultText = "";
+        resultText += "jangs = {\n";
+        for (let i = 0; i < usercoybot.length; i++) {
+          const [user, pass] = usercoybot[i].split(":");
+          resultText += `   "${user}:${pass}",\n`;
+        }
+        resultText += "}\n";
+        resultText += "for _, namebot in pairs(jangs) do\n";
+        resultText += '   local user, pass = namebot:match("(.-):(.+)")\n';
+        resultText += "   addBot(user, pass)\n";
+        resultText += "   sleep(100)\n";
+        resultText += "end\n";
+        const resultTextArea = document.getElementById("result");
+        resultTextArea.value = resultText;
+      }
       function generateData() {
         const botText = document.getElementById("botTextarea").value;
         const proxyText = document.getElementById("proxyTextarea").value;
@@ -171,84 +423,82 @@
         const resultTextArea = document.getElementById("result");
         resultTextArea.value = resultText;
       }
-    </script>
-  </head>
-  <body>
-    <h1 style="text-align: center">JangsID | Script Store</h1>
-
-    <table class="container">
-      <tr>
-        <td style="text-align: center">
-          <h2>Bot</h2>
-          <textarea
-            id="botTextarea"
-            placeholder="Contoh : username:password"
-          ></textarea>
-        </td>
-        <td style="text-align: center">
-          <h2>Proxy</h2>
-          <textarea
-            id="proxyTextarea"
-            placeholder="Contoh : ip:port:user:pass"
-          ></textarea>
-        </td>
-      </tr>
-      <tr>
-        <td style="text-align: center">
-          <h2>Bot per IP</h2>
-          <input type="number" id="botPerIP" value="3" />
-        </td>
-        <td style="text-align: center">
-          <h2>Actions</h2>
-          <button onclick="generateData()">Surfer</button>
-          <button onclick="generateOlym()">Olympus</button>
-          <button onclick="generateLuci()">Lucifer</button>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <h2>Result Script :</h2>
-          <textarea id="result" readonly></textarea>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2" class="credit-box">
-          <p>Made By : Jangs Lebaran</p>
-          <p>JangsID Store Price :</p>
-          <p></p>
-          <p>Guest 3WL</p>
-          <p>CID ANTI 15WL</p>
-          <p>Link : https://discord.gg/mFSzq2g76Q</p>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2" style="text-align: center">
-          <button onclick="copyHasil()">Copy</button>
-        </td>
-      </tr>
-    </table>
-
-    <script>
-      function generateLuci() {
-        const botText = document.getElementById("botTextarea").value;
-        const usercoybot = botText
-          .split("\n")
-          .map((line) => line.trim())
-          .filter((line) => line !== "");
-        let resultText = "";
-        resultText += "jangs = {\n";
-        for (let i = 0; i < usercoybot.length; i++) {
-          const [user, pass] = usercoybot[i].split(":");
-          resultText += `   "${user}:${pass}",\n`;
+      function groupFarms() {
+        var farmListText = document.getElementById("farmList").value;
+        if (farmListText.trim() !== "") {
+          var lastCharacter = farmListText.slice(-1);
+          if (lastCharacter !== ",") {
+            farmListText += ",";
+          }
         }
-        resultText += "}\n";
-        resultText += "for _, namebot in pairs(jangs) do\n";
-        resultText += '   local user, pass = namebot:match("(.-):(.+)")\n';
-        resultText += "   addBot(user, pass)\n";
-        resultText += "   sleep(100)\n";
-        resultText += "end\n";
-        const resultTextArea = document.getElementById("result");
-        resultTextArea.value = resultText;
+        var regex = /"([^"]+)"/g;
+        var farms = [];
+        var match;
+        while ((match = regex.exec(farmListText)) !== null) {
+          farms.push(match[1]);
+        }
+
+        var total = parseInt(document.getElementById("total").value);
+
+        var farmGroups = [];
+        for (var i = 0; i < farms.length; i += total) {
+          farmGroups.push(`"${farms.slice(i, i + total).join('","')}"`);
+        }
+
+        var result = farmGroups.join(",\n");
+        document.getElementById("result").textContent = result;
+
+        var blob = new Blob([result], { type: "text/plain" });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = "config_farm.txt";
+        a.style.display = "none";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+
+      function createWorldDoorFile() {
+        var worldListTextarea = document.getElementById("worldList");
+        var worldListText = worldListTextarea.value.replace(/"/g, "");
+        var doorValue = document.getElementById("door").value;
+        var lines = worldListText.split(",");
+        var formattedLines = [];
+        for (var i = 0; i < lines.length; i++) {
+          var word = lines[i].trim();
+          if (word) {
+            formattedLines.push(`"${word}|${doorValue}",`);
+          }
+        }
+        var fileText = formattedLines.join("\n").toUpperCase();
+        var blob = new Blob([fileText], { type: "text/plain" });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = "world_door.txt";
+        a.textContent = "Download world_door.txt";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        worldListTextarea.value = "";
+      }
+      function hapusKata() {
+        var farmListTextarea = document.getElementById("farmList");
+        var kataHapusTextarea = document.getElementById("kataHapus");
+
+        var farmListText = farmListTextarea.value;
+        var kataHapusText = kataHapusTextarea.value;
+
+        var farmList = farmListText.split(",");
+        var kataHapus = kataHapusText.split(",");
+
+        var farmListBaru = farmList.filter(function (kata) {
+          return kataHapus.indexOf(kata) === -1;
+        });
+        var farmListBaruText = farmListBaru.join(",");
+        farmListTextarea.value = farmListBaruText;
+        kataHapusTextarea.value = "";
       }
     </script>
   </body>
