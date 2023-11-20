@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> </title>
     <style>
       body {
         background-image: url("https://media.discordapp.net/attachments/1068072767955685446/1147673792651464886/Jangs.jpg?width=327&height=327");
@@ -58,7 +55,7 @@
         border: none;
         padding: 10px 20px;
         cursor: pointer;
-        border-radius: 5px; 
+        border-radius: 5px;
         transition: background-color 0.3s ease;
       }
       button:hover {
@@ -67,21 +64,22 @@
       textarea {
         color: rgb(255, 255, 255);
         background-color: black;
-        resize: none; 
+        resize: none;
       }
       .button-container {
-        position: absolute;
-        top: 150px;
-        left: 50px;
+        position: relative;
+        margin-top: 150px;
+        margin-left: 50px;
         display: flex;
         flex-direction: column;
         border: 2px solid #333;
-        border-radius: 5px; 
+        border-radius: 5px;
         padding: 20px;
-        margin: 10px; 
+        margin: 10px;
         text-align: center;
-        resize: none; 
+        resize: none;
       }
+
       .button {
         margin-bottom: 10px;
         padding: 10px 20px;
@@ -102,44 +100,78 @@
     <div class="center-box">
       <h1>JangsID | Script Store</h1>
       <div id="content">
-        <h2>How to Use !!</h2>
-        <p>1.Pilih dari samping kiri.</p>
-        <p>2.Tekan dan liat apa yang terjadi.</p>
-        <p></p>
-        <p>Made By : Jangs Lebaran.</p>
-        <p>Link for other product :</p>
-        <p>
-          <a href="https://discord.gg/mFSzq2g76Q" target="_blank" style="color: white;">
-            Join our Discord Server
-          </a>
-        </p>
+        <h2>Selamat datang di JangsID Script Store!</h2>
+        <p>Di sini Anda dapat menemukan berbagai script yang berguna.</p>
+        <p>Silakan pilih kategori script yang Anda inginkan.</p>
       </div>
       <div class="button-container">
-          <button class="button button1" onclick="loadScript()">
-            <img
-              src="https://cdn.discordapp.com/emojis/1070928025132204032.webp?size=80&quality=lossless"
-              alt="Script Logo"
-            />
-            <span>Script</span>
-          </button>
-          <button class="button button2" onclick="loadSusun()">
-            <img
-              src="https://cdn.discordapp.com/emojis/1151947032450318436.webp?size=80&quality=lossless"
-              alt="Susun Logo"
-            />
-            <span>Susun</span>
-          </button>
-          <button class="button button3" onclick="loadJangs()">
-            <img
-              src="https://cdn.discordapp.com/emojis/1070928063849844787.webp?size=80&quality=lossless"
-              alt="Jangs Logo"
-            />
-            <span>Jangs</span>
-          </button>
-        </div>
+        <button class="button button1" onclick="showContent('script')">
+          <img
+            src="https://cdn.discordapp.com/emojis/1070928025132204032.webp?size=80&quality=lossless"
+            alt="Script Logo"
+          />
+          <span>Script</span>
+        </button>
+        <button class="button button2" onclick="showContent('susun')">
+          <img
+            src="https://cdn.discordapp.com/emojis/1151947032450318436.webp?size=80&quality=lossless"
+            alt="Susun Logo"
+          />
+          <span>Susun</span>
+        </button>
+        <button class="button button3" onclick="showContent('jangs')">
+          <img
+            src="https://cdn.discordapp.com/emojis/1070928063849844787.webp?size=80&quality=lossless"
+            alt="Jangs Logo"
+          />
+          <span>Jangs</span>
+        </button>
       </div>
     </div>
     <script>
+      function isMobileDevice() {
+        return window.innerWidth <= 600;
+      }
+
+      function showContent(contentType) {
+        const content = document.getElementById("content");
+        const scriptButton = document.querySelector(".button1");
+        const susunButton = document.querySelector(".button2");
+        const jangsButton = document.querySelector(".button3");
+
+        scriptButton.classList.remove("active");
+        susunButton.classList.remove("active");
+        jangsButton.classList.remove("active");
+        switch (contentType) {
+          case "script":
+            loadScript();
+            scriptButton.classList.add("active");
+            break;
+          case "susun":
+            loadSusun();
+            susunButton.classList.add("active");
+            break;
+          case "jangs":
+            loadJangs();
+            jangsButton.classList.add("active");
+            break;
+          default:
+            break;
+        }
+        if (isMobileDevice()) {
+          scriptButton.style.display = "none";
+          susunButton.style.display = "none";
+          jangsButton.style.display = "none";
+        } else {
+          scriptButton.style.display = "inline-block";
+          susunButton.style.display = "inline-block";
+          jangsButton.style.display = "inline-block";
+        }
+      }
+      document.addEventListener("DOMContentLoaded", function () {
+        showContent("jangs");
+      });
+
       function loadScript() {
         const content = document.getElementById("content");
         content.innerHTML = `
@@ -286,7 +318,7 @@
         `;
         document.querySelector("h1").style.display = "none";
       }
-      
+
       function generateLuci() {
         const botText = document.getElementById("botTextarea").value;
         const usercoybot = botText
